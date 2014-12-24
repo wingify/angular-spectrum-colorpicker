@@ -6,3 +6,6 @@ npm-debug.log
 grunt
 .idea
 .tmp
+
+.project
+.settings
