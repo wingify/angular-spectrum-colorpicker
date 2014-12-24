@@ -1,6 +1,6 @@
 {
   "name": "angular-spectrum-colorpicker",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/",
   "subdescription": "Idea from http://jsfiddle.net/g/LAJCa/",
   "homepage": "https://github.com/Jimdo/angular-spectrum-colorpicker",
