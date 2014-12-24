@@ -75,7 +75,7 @@
           'show': 'onShow'
         }, function(eventKey, spectrumOptionName) {
           localOpts[spectrumOptionName] = function(color) {
-            onChange(color);
+            //onChange(color);
             // we don't do this for change, because we expose the current
             // value actively through the model
             if (eventKey !== 'change' && angular.isFunction($scope[eventKey])) {
