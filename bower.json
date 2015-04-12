@@ -31,7 +31,7 @@
     "jasmine-moar-matchers": "~0.0.2"
   },
   "dependencies": {
-    "spectrum": "1.6.0",
+    "spectrum": "1.6.2",
     "angular": "^1.2.8"
   },
   "ignore": [
