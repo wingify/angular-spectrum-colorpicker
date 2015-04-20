@@ -137,7 +137,7 @@ describe('SpectrumDirective', function() {
         'options': 'options'
       });
       expect($('.sp-container').length).toBe(1);
-      d.scope.$destroy();
+     d.elm.trigger('$destroy');
       expect($('.sp-container').length).toBe(0);
     });
 
