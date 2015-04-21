@@ -124,6 +124,7 @@ describe('SpectrumDirective', function() {
         expect(d.elm.find('.sp-active').length).toBe(1);
         d.scope.$destroy();
         expect(getClickEventNumber()).toBe(initialEvents);
+		expect(d.elm.find('.sp-active').length).toBe(1);
       });
     });
 
