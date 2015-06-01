@@ -10,7 +10,7 @@
         format: '=?',
         options: '=?',
         triggerId: '@?',
-
+		palette : '=?',
         onChange: '&?',
         onShow: '&?',
         onHide: '&?',
@@ -89,6 +89,10 @@
             return $scope.onBeforeShow({color: formatColor(color)});
           };
         }
+		
+		if ($scope.palette) {
+          localOpts.palette = $scope.palette;
+        }
 
         var options = angular.extend({}, baseOpts, $scope.options, localOpts);
 
@@ -105,8 +109,8 @@
           $input.spectrum('set', options.color || '');
           setViewValue(options.color);
         }
-
-        $input.spectrum(options);
+		 
+		$input.spectrum(options);
 
         $scope.$on('$destroy', function() {
           if ($scope.triggerId) {
@@ -121,7 +125,11 @@
 
         $scope.$watch('disabled', function (newDisabled) {
           $input.spectrum(newDisabled ? 'disable' : 'enable');
-        });
+        });		
+
+		$scope.$watch('palette', function (palette) {
+		  $input.spectrum('option', 'palette', palette);
+		});
       }
     };
   });
