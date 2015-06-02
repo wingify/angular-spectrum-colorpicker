@@ -17,6 +17,11 @@
         onMove: '&?',
 
         onBeforeShow: '&?',
+		
+	    onChangeOptions: '=?',
+	    onShowOptions: '=?',
+	    onHideOptions: '=?',
+	    onMoveOptions: '=?'
       },
       replace: true,
       templateUrl: 'directive.html',
@@ -68,21 +73,27 @@
 
         var localOpts = {};
 
-        angular.forEach({
-          'change': 'onChange',
-          'move': 'onMove',
-          'hide': 'onHide',
-          'show': 'onShow'
-        }, function(eventKey, spectrumOptionName) {
-          localOpts[spectrumOptionName] = function(color) {
-            onChange(color);
-            // we don't do this for change, because we expose the current
-            // value actively through the model
-            if (eventKey !== 'change' && angular.isFunction($scope[eventKey])) {
-              return $scope[eventKey]({color: formatColor(color)});
-            }
-          };
-        });
+            angular.forEach({
+                'change': 'onChange',
+                'move': 'onMove',
+                'hide': 'onHide',
+                'show': 'onShow',
+            },
+            function (eventHandlerName, eventName) {
+                var spectrumEventHandlerOptions = $scope[eventHandlerName + 'Options'];
+                localOpts[eventName] = function (color) {
+                    if (!spectrumEventHandlerOptions || spectrumEventHandlerOptions.update) {
+                        onChange(color);
+                    }
+                    // we don't do this for change, because we expose the current
+                    // value actively through the model
+                    if (eventHandlerName !== 'change' && angular.isFunction($scope[eventHandlerName])) {
+                        return $scope[eventHandlerName]({ color: formatColor(color) });
+                    } else {
+                        return null;
+                    }
+               };
+          });
 
         if (angular.isFunction($scope.onBeforeShow)) {
           localOpts.beforeShow = function(color) {
