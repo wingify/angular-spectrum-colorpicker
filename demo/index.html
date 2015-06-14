@@ -4,11 +4,15 @@
   <meta charset="utf-8">
   <title>My angular spectrum demo</title>
 
-  <link rel="stylesheet" href="/bower_components/spectrum/spectrum.css" />
-  <link rel="stylesheet" href="/demo/styles.css" />
+  <link rel="stylesheet" href="../bower_components/spectrum/spectrum.css" />
+  <link rel="stylesheet" href="../demo/styles.css" />
   <!-- [[src/less]] -->
   <!-- [[src/js]] -->
-  <script src="demo/app.js"></script>
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../dist/angular-spectrum-colorpicker.js"></script>
+  <script src="../bower_components/spectrum/spectrum.js"></script>
+  <script src="../demo/app.js"></script>
 </head>
 <body ng-controller="ColorPickerCtrl" ng-init="color = 'red'; trigger = 'theTrigger'">
 
