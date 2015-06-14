@@ -1,5 +1,5 @@
 /*!
- * angular-spectrum-colorpicker v1.3.5
+ * angular-spectrum-colorpicker v1.4.0
  * https://github.com/Jimdo/angular-spectrum-colorpicker
  *
  * Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/
@@ -27,13 +27,18 @@
           format: '=?',
           options: '=?',
           triggerId: '@?',
-  
+  		palette : '=?',
           onChange: '&?',
           onShow: '&?',
           onHide: '&?',
           onMove: '&?',
   
           onBeforeShow: '&?',
+  		
+  	    onChangeOptions: '=?',
+  	    onShowOptions: '=?',
+  	    onHideOptions: '=?',
+  	    onMoveOptions: '=?'
         },
         replace: true,
         templateUrl: 'directive.html',
@@ -85,26 +90,36 @@
   
           var localOpts = {};
   
-          angular.forEach({
-            'change': 'onChange',
-            'move': 'onMove',
-            'hide': 'onHide',
-            'show': 'onShow'
-          }, function(eventKey, spectrumOptionName) {
-            localOpts[spectrumOptionName] = function(color) {
-              onChange(color);
-              // we don't do this for change, because we expose the current
-              // value actively through the model
-              if (eventKey !== 'change' && angular.isFunction($scope[eventKey])) {
-                return $scope[eventKey]({color: formatColor(color)});
-              }
-            };
-          });
+              angular.forEach({
+                  'change': 'onChange',
+                  'move': 'onMove',
+                  'hide': 'onHide',
+                  'show': 'onShow',
+              },
+              function (eventHandlerName, eventName) {
+                  var spectrumEventHandlerOptions = $scope[eventHandlerName + 'Options'];
+                  localOpts[eventName] = function (color) {
+                      if (!spectrumEventHandlerOptions || spectrumEventHandlerOptions.update) {
+                          onChange(color);
+                      }
+                      // we don't do this for change, because we expose the current
+                      // value actively through the model
+                      if (eventHandlerName !== 'change' && angular.isFunction($scope[eventHandlerName])) {
+                          return $scope[eventHandlerName]({ color: formatColor(color) });
+                      } else {
+                          return null;
+                      }
+                 };
+            });
   
           if (angular.isFunction($scope.onBeforeShow)) {
             localOpts.beforeShow = function(color) {
               return $scope.onBeforeShow({color: formatColor(color)});
             };
+          }
+  		
+  		if ($scope.palette) {
+            localOpts.palette = $scope.palette;
           }
   
           var options = angular.extend({}, baseOpts, $scope.options, localOpts);
@@ -122,15 +137,17 @@
             $input.spectrum('set', options.color || '');
             setViewValue(options.color);
           }
-  
-          $input.spectrum(options);
+  		 
+  		$input.spectrum(options);
   
           $scope.$on('$destroy', function() {
             if ($scope.triggerId) {
               angular.element(document.body).off('click', '#' + $scope.triggerId, onToggle);
-            }
-            $input.spectrum('destroy');
+            } 
           });
+  		$element.on('$destroy', function(){
+  			$input.spectrum('destroy');
+  		});
   
           if(angular.isDefined(options.disabled)) {
             $scope.disabled = !!options.disabled;
@@ -138,7 +155,11 @@
   
           $scope.$watch('disabled', function (newDisabled) {
             $input.spectrum(newDisabled ? 'disable' : 'enable');
-          });
+          });		
+  
+  		$scope.$watch('palette', function (palette) {
+  		  $input.spectrum('option', 'palette', palette);
+  		});
         }
       };
     });
