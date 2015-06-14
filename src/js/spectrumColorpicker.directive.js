@@ -111,9 +111,11 @@
         $scope.$on('$destroy', function() {
           if ($scope.triggerId) {
             angular.element(document.body).off('click', '#' + $scope.triggerId, onToggle);
-          }
-          $input.spectrum('destroy');
+          } 
         });
+		$element.on('$destroy', function(){
+			$input.spectrum('destroy');
+		});
 
         if(angular.isDefined(options.disabled)) {
           $scope.disabled = !!options.disabled;
