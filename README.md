@@ -138,9 +138,9 @@ Version history
 * 1.3.3
  * refactor triggers to work with delayed DOM
 * 1.3.2
- * not released (grunt release fup) 
+ * not released (grunt release fup)
 * 1.3.1
- * Add handling of disabled attribute. See #15. 
+ * Add handling of disabled attribute. See #15.
 * 1.3.0
  * reintegrate with [Jimdo/angular-directive-seed](https://github.com/Jimdo/angular-directive-seed).
  * Add eventing (partially backwards-incompatible due to how the triggering of `onChange` is handled). See #21.
