@@ -72,7 +72,7 @@ Changes the format of the final value. A list of formats can be found in the [sp
 </spectrum-colorpicker>
 ```
 * (Optional) bind palette
-```
+```html
 <spectrum-colorpicker
   palette="colors">
 </spectrum-colorpicker>
