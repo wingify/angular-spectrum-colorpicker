@@ -77,7 +77,7 @@ describe('SpectrumDirective', function() {
         'options': 'options'
       });
       expect(d.elm.find('input').attr('disabled')).toBe('disabled');
-    });
+    });	
 
     describe('trigger handler', function() {
       var $label;
@@ -140,6 +140,34 @@ describe('SpectrumDirective', function() {
       expect($('.sp-container').length).toBe(1);
      d.elm.trigger('$destroy');
       expect($('.sp-container').length).toBe(0);
+    });	
+	
+	it('should set palette via evaluated value', function() {
+      var input = ['#FFF', '#000'], output = ['rgb(255, 255, 255)', 'rgb(0, 0, 0)'];
+      $rootScope.palette = [input];      
+	  $rootScope.options = {
+        showPalette: true
+      };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'palette': 'palette',
+		'options': 'options'
+      });
+
+      $('.sp-palette .sp-thumb-el').each(function(index, el){ 
+			expect($(el).html()).toContain(output[index]);
+	  });	  
+	  expect($('.sp-palette .sp-thumb-el').length).toBe(2);
+	  
+		it('should update palette via evaluated value', function() {
+		  var input = ['#000'], output = ['rgb(0, 0, 0)'];
+		  $rootScope.palette = [input];  
+		  $rootScope.digest();
+		  $('.sp-palette .sp-thumb-el').each(function(index, el){ 
+				expect($(el).html()).toContain(output[index]);
+		  });	  
+		  expect($('.sp-palette .sp-thumb-el').length).toBe(1);
+		});	  
     });
 
     it('should cope with falsy color values', function() {
