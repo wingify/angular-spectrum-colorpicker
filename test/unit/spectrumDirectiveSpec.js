@@ -256,7 +256,191 @@ describe('SpectrumDirective', function() {
     beforeEach(function() {
       initGlobals();
     });
+	
+	it('should propagate change to color on change', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'options' : 'options'
+      });
+      
+      $('input.sp-input').val(color).trigger('change');
+      expect($rootScope.targetColor).toHaveBeenCalledWith(color);
+    });
+	
+	it('should not propagate change to color on change with update option set to false', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-change-options' : '{ update : false }',
+		'options' : 'options'
+      });
+      
+      $('input.sp-input').val(color).trigger('change');
+      expect($rootScope.targetColor).not.toHaveBeenCalledWith(color);
+    });
 
+	it('should propagate change to color on show', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'options' : 'options'
+      });
+      d.elm.find('input').spectrum('show');
+      expect($rootScope.targetColor).toHaveBeenCalledWith(color);
+    });
+	
+	it('should not propagate change to color on show with update option set to false', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-show-options' : '{ update : false }',
+		'options' : 'options'
+      });
+      d.elm.find('input').spectrum('show');
+      expect($rootScope.targetColor).not.toHaveBeenCalledWith(color);
+    });
+	
+	it('should propagate change to color on hide', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-show-options' : '{ update : false }',
+		'options' : 'options'
+      });
+	  
+      d.elm.find('input').spectrum('show');
+      d.elm.find('input').spectrum('hide');
+      expect($rootScope.targetColor).toHaveBeenCalledWith(color);
+    });
+	
+	it('should not propagate change to color on hide with update option set to false', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-show-options' : '{ update : false }',
+		'on-hide-options' : '{ update : false }',
+		'options' : 'options'
+      });
+	  d.elm.find('input').spectrum('show');
+      d.elm.find('input').spectrum('hide');
+      expect($rootScope.targetColor).not.toHaveBeenCalledWith(color);
+    });
+	
+	it('should propagate change to color on move', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-show-options' : '{ update : false }',
+		'options' : 'options'
+      });
+	  
+      d.elm.find('input').spectrum('show');
+      $(document).find('.sp-clear').click();
+      expect($rootScope.targetColor).toHaveBeenCalledWith(color);
+    });
+	
+	it('should not propagate change to color on move with update option set to false', function() {
+	  var color = '#FFF';
+	  $rootScope.targetColor = jasmine.createSpy('targetColor');
+	  $rootScope.targetColor.and.callFake(function(value){
+		  if(angular.isDefined(value)){
+			color = value;
+		  }
+		  return color;
+	  });
+	  $rootScope.options = {		  
+            showPalette: true
+	  };
+      var d = createDirective({
+        'ng-model': 'targetColor',
+        'ng-model-options': '{ getterSetter : true }',
+		'on-show-options' : '{ update : false }',
+		'on-move-options' : '{ update : false }',
+		'options' : 'options'
+      });
+	  d.elm.find('input').spectrum('show');
+      $(document).find('.sp-clear').click();
+      expect($rootScope.targetColor).not.toHaveBeenCalledWith(color);
+    });
+	
     it('should correctly emit change event', function() {
       $rootScope.eventSpy = jasmine.createSpy('change');
       var d = createDirective({
@@ -267,8 +451,8 @@ describe('SpectrumDirective', function() {
       $rootScope.targetColor = 'blue';
       expect($rootScope.eventSpy).toHaveBeenCalled();
     });
-
-    it('should correctly emit show event', function() {
+	
+	it('should correctly emit show event', function() {
       $rootScope.eventSpy = jasmine.createSpy('show');
       var d = createDirective({
         'ng-model': 'targetColor',
