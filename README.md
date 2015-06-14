@@ -71,6 +71,12 @@ Changes the format of the final value. A list of formats can be found in the [sp
   >
 </spectrum-colorpicker>
 ```
+* (Optional) bind palette
+```
+<spectrum-colorpicker
+  palette="colors">
+</spectrum-colorpicker>
+```
 A description of the events can be found in the [spectrum documentation](https://bgrins.github.io/spectrum/#events).
 
 Initialize the source project
