@@ -12,7 +12,6 @@
   'use strict';
 
   // src/js/helper.module.js
-  /* jshint unused: false, -W079 */
   var angularSpectrumColorpicker = angular.module('angularSpectrumColorpicker', []);
 
   // src/js/spectrumColorpicker.directive.js
@@ -129,11 +128,9 @@
           $scope.$on('$destroy', function() {
             if ($scope.triggerId) {
               angular.element(document.body).off('click', '#' + $scope.triggerId, onToggle);
-            } 
+            }
+            $input.spectrum('destroy');
           });
-  		$element.on('$destroy', function(){
-  			$input.spectrum('destroy');
-  		});
   
           if(angular.isDefined(options.disabled)) {
             $scope.disabled = !!options.disabled;
@@ -152,7 +149,7 @@
     'use strict';
   
     $templateCache.put('directive.html',
-      "<span><input class=\"input-small\"></span>"
+      "<span><input class=input-small></span>"
     );
   
   }]);
