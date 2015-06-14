@@ -77,6 +77,16 @@ Changes the format of the final value. A list of formats can be found in the [sp
   palette="colors">
 </spectrum-colorpicker>
 ```
+* (Optional) stop eventing
+```html
+<spectrum-colorpicker
+  on-change-options="{ update : false }"
+  on-show-options="{ update : false }"
+  on-hide-options="{ update : false }"
+  on-move-options="{ update : false }"
+  >
+</spectrum-colorpicker>
+```
 A description of the events can be found in the [spectrum documentation](https://bgrins.github.io/spectrum/#events).
 
 Initialize the source project
