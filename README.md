@@ -133,6 +133,12 @@ _See Gruntfile.js and tasks/options for all task details._
 
 Version history
 ---------------
+* 1.4.0
+ * demo fixes (thanks @mprinc)
+ * destroy event fixes (thanks @tomaszkrym)
+ * palette attribute option (thanks @dmnn)
+ * possibility to disable eventing (thanks @dmnn)
+ * Update to spectrum 1.7.0
 * 1.3.4
  * re-adds `$scope.$apply` around model value change, because it caused problems
 * 1.3.3
