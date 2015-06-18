@@ -2,7 +2,7 @@
   'use strict';
   angularSpectrumColorpicker.directive('spectrumColorpicker', function() {
     return {
-      restrict: 'E',
+      restrict: 'EA',
       require: 'ngModel',
       scope: {
         fallbackValue: '=',

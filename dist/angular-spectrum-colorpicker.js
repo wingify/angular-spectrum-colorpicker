@@ -19,7 +19,7 @@
     'use strict';
     angularSpectrumColorpicker.directive('spectrumColorpicker', function() {
       return {
-        restrict: 'E',
+        restrict: 'EA',
         require: 'ngModel',
         scope: {
           fallbackValue: '=',
@@ -170,7 +170,7 @@
     'use strict';
   
     $templateCache.put('directive.html',
-      "<span><input class=input-small></span>"
+      "<span><input class=\"input-small\"></span>"
     );
   
   }]);
