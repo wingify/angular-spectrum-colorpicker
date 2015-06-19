@@ -22,6 +22,14 @@ describe('SpectrumDirective', function() {
       expect($('.sp-container').length > 0).toBe(true);
     });
 
+    it('should initialize spectrum when compiling the div tag with the directive atttribute', function() {
+      var d = createDirective({
+        'ng-model': 'targetColor'
+      }, true);
+
+      expect(d.elm.find('input').length > 0).toBe(true);
+      expect($('.sp-container').length > 0).toBe(true);
+    });
 
     it('should update the model when changing the color in the colorpicker', function() {
       $rootScope.targetColor = 'green';

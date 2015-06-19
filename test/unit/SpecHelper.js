@@ -9,7 +9,7 @@ var $rootScope, $compile, $injector, $httpBackend, $scope, $q, $controller;
 /**
  * Initiate the angular module we want to test on and initiate
  * global angular modules required for testing (like $rootScope etc.)
- * 
+ *
  * @param {bool} [withModule] disable automatic module initiation
  *                            (by default, the module is initiated
  *                            automatically for you)
@@ -33,15 +33,19 @@ function initGlobals(withModule) {
 }
 
 
-function createDirective(attributes) {
+function createDirective(attributes, attributeMode) {
   var r = {};
 
   /* Create the element for our directive */
+  var markupStart = '<spectrum-colorpicker';
   var attr = '';
   angular.forEach(attributes, function(value, key) {
     attr += ' ' + key + '=' + '"' + ('' + value).replace(/"/g, '&quot;') + '"';
   });
-  r.elm = angular.element('<spectrum-colorpicker' + attr + '>');
+  if (attributeMode) {
+    markupStart = '<div spectrum-colorpicker';
+  }
+  r.elm = angular.element(markupStart + attr + '>');
 
   /* Apply the directive */
   $compile(r.elm)($rootScope);
