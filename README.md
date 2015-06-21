@@ -89,6 +89,11 @@ Changes the format of the final value. A list of formats can be found in the [sp
 ```
 A description of the events can be found in the [spectrum documentation](https://bgrins.github.io/spectrum/#events).
 
+* Attribute mode (since 1.4.1)
+```html
+<input type="color" spectrum-colorpicker ...>
+```
+
 Initialize the source project
 -----------------------------
 
@@ -133,6 +138,8 @@ _See Gruntfile.js and tasks/options for all task details._
 
 Version history
 ---------------
+* 1.4.1
+ * Attribute mode (thanks @fernandopasik)
 * 1.4.0
  * demo fixes (thanks @mprinc)
  * destroy event fixes (thanks @tomaszkrym)
