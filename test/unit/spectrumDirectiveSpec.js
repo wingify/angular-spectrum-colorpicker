@@ -1,18 +1,19 @@
 /* jshint unused: false */
-/* global initGlobals, $, $compile, $rootScope, console, createDirective */
+/* global initGlobals, $, $compile, $rootScope, console, createDirective, $injector */
 describe('SpectrumDirective', function() {
   'use strict';
+  var $timeout;
+
+  beforeEach(function() {
+    initGlobals();
+    $timeout = $injector.get('$timeout');
+  });
 
   it('should be able to find the angular module', function() {
     expect(angular.module('angularSpectrumColorpicker')).toBeDefined();
   });
 
   describe('legacy', function() {
-
-    beforeEach(function() {
-      initGlobals();
-    });
-
     it('should initialize spectrum when compiling the directive tag', function() {
       var d = createDirective({
         'ng-model': 'targetColor'
@@ -39,6 +40,7 @@ describe('SpectrumDirective', function() {
 
       // set value within the colorpicker
       $('input.sp-input').val('#0000ff').trigger('change');
+      $timeout.flush();
 
       // scope should have been changed!
       expect($rootScope.targetColor).toBe('#0000ff');
@@ -190,6 +192,7 @@ describe('SpectrumDirective', function() {
 
       d.elm.find('input').spectrum('show');
       $('.sp-cancel').click();
+      $timeout.flush();
       expect($rootScope.targetColor).toBe(null);
     });
 
@@ -208,6 +211,7 @@ describe('SpectrumDirective', function() {
 
       d.elm.find('input').spectrum('show');
       $('.sp-cancel').click();
+      $timeout.flush();
       expect($rootScope.targetColor).toBe(fallback);
     });
 
@@ -221,6 +225,7 @@ describe('SpectrumDirective', function() {
 
       // set value to an rgba-color
       $('input.sp-input').val('rgba(255, 0, 0, 0.6)').trigger('change');
+      $timeout.flush();
 
       // since format is set to hex, we should still get hex back, not rgba
       expect($rootScope.targetColor.toString()).toBe('#ff0000');
@@ -236,6 +241,7 @@ describe('SpectrumDirective', function() {
 
       // set value to an hsv-color
       $('input.sp-input').val('hsv(0, 100%, 100%)').trigger('change');
+      $timeout.flush();
       // since format is now set to an evaluated value of rgb, we should now get rgb back
       expect($rootScope.targetColor.toString()).toBe('rgb(255, 0, 0)');
     });
@@ -255,16 +261,13 @@ describe('SpectrumDirective', function() {
 
       for (var i = 0; i < formats.length; i++) {
         $('input.sp-input').val(formats[i]).trigger('change');
+        $timeout.flush();
         expect($rootScope.targetColor.toString()).toBe(formats[i]);
       }
     });
   });
 
   describe('eventing', function() {
-    beforeEach(function() {
-      initGlobals();
-    });
-	
 	it('should propagate change to color on change', function() {
 	  var color = '#FFF';
 	  $rootScope.targetColor = jasmine.createSpy('targetColor');
@@ -284,6 +287,7 @@ describe('SpectrumDirective', function() {
       });
       
       $('input.sp-input').val(color).trigger('change');
+      $timeout.flush();
       expect($rootScope.targetColor).toHaveBeenCalledWith(color);
     });
 	
@@ -328,6 +332,7 @@ describe('SpectrumDirective', function() {
 		'options' : 'options'
       });
       d.elm.find('input').spectrum('show');
+      $timeout.flush();
       expect($rootScope.targetColor).toHaveBeenCalledWith(color);
     });
 	
@@ -374,6 +379,7 @@ describe('SpectrumDirective', function() {
 	  
       d.elm.find('input').spectrum('show');
       d.elm.find('input').spectrum('hide');
+      $timeout.flush();
       expect($rootScope.targetColor).toHaveBeenCalledWith(color);
     });
 	
@@ -422,6 +428,7 @@ describe('SpectrumDirective', function() {
 	  
       d.elm.find('input').spectrum('show');
       $(document).find('.sp-clear').click();
+      $timeout.flush();
       expect($rootScope.targetColor).toHaveBeenCalledWith(color);
     });
 	
