@@ -1,6 +1,6 @@
 /*!
- * angular-spectrum-colorpicker v1.4.1
- * https://github.com/Jimdo/angular-spectrum-colorpicker
+ * angular-spectrum-colorpicker v1.4.2
+ * https://github.com/wingify/angular-spectrum-colorpicker
  *
  * Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/
  * Idea from http://jsfiddle.net/g/LAJCa/
@@ -27,7 +27,8 @@
           format: '=?',
           options: '=?',
           triggerId: '@?',
-  		palette : '=?',
+          palette : '=?',
+          initialColor: '=?',
           onChange: '&?',
           onShow: '&?',
           onHide: '&?',
@@ -160,6 +161,10 @@
   		$scope.$watch('palette', function (palette) {
   		  $input.spectrum('option', 'palette', palette);
   		});
+  
+          $scope.$watch('initialColor', function (initialColor) {
+            $input.spectrum('set', initialColor);
+          });
         }
       };
     });

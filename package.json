@@ -1,9 +1,9 @@
 {
   "name": "angular-spectrum-colorpicker",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Angular directive for a colorpicker, that bases on http://bgrins.github.io/spectrum/",
   "subdescription": "Idea from http://jsfiddle.net/g/LAJCa/",
-  "homepage": "https://github.com/Jimdo/angular-spectrum-colorpicker",
+  "homepage": "https://github.com/wingify/angular-spectrum-colorpicker",
   "author": "Jimdo GmbH",
   "maintainers": [
     "Joscha Feth <joscha@feth.com>"
@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Jimdo/angular-spectrum-colorpicker.git"
+    "url": "git://github.com/wingify/angular-spectrum-colorpicker.git"
   },
   "license": "MIT",
   "devDependencies": {

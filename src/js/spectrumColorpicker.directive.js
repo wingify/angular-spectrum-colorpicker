@@ -10,7 +10,8 @@
         format: '=?',
         options: '=?',
         triggerId: '@?',
-		palette : '=?',
+        palette : '=?',
+        initialColor: '=?',
         onChange: '&?',
         onShow: '&?',
         onHide: '&?',
@@ -143,6 +144,10 @@
 		$scope.$watch('palette', function (palette) {
 		  $input.spectrum('option', 'palette', palette);
 		});
+
+        $scope.$watch('initialColor', function (initialColor) {
+          $input.spectrum('set', initialColor);
+        });
       }
     };
   });
